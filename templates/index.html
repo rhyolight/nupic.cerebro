@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Cerebro 2</title>
+  <link rel="stylesheet" href="/static/javascript/jquery/themes/start/jquery-ui-1.8.16.custom.css">
+  <link rel="stylesheet" href="/static/css/cerebro.css">
+  <link rel="stylesheet" href="/static/css/codemirror.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+  <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+
+  <script type="text/javascript">
+    GROK = { util: { heir: function(p) {
+                  function F() {}   // A dummy constructor function
+                  F.prototype = p;  // Specify the prototype object we want
+                  return new F();   // Invoke the constructor to create new object
+              }} };
+  </script>
+
+  <script type="text/javascript" src="/static/javascript/jquery-1.9.1.min.js"> </script>
+  <script src="/static/javascript/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/static/javascript/jquery/jquery.textarea.js"> </script>
+  <script type="text/javascript" src="/static/javascript/cerebro/experiment.js"> </script>
+  <script type="text/javascript" src="/static/javascript/dygraph/dygraph-combined.js" ></script>
+  <script type="text/javascript" src="/static/javascript/interaction.js" ></script>
+  <script type="text/javascript" src="/static/javascript/cerebro/hinton.js"> </script>
+  <script type="text/javascript" src="/static/javascript/raphael-min.js"> </script>
+  <script type="text/javascript" src="/static/javascript/codemirror/codemirror.js"> </script>
+  <script type="text/javascript" src="/static/javascript/codemirror/mode/python/python.js"> </script>
+
+  <script type="text/javascript" src="/static/javascript/chart.js"></script>
+  <script type="text/javascript" src="/static/javascript/chartgroup.js"></script>
+  <script type="text/javascript" src="/static/javascript/dataset.js"></script>
+  <script type="text/javascript" src="/static/javascript/nugraph/nugraph.js"></script>
+
+  <script type="text/javascript" src="/static/javascript/cerebro/dataSetup.js"></script>
+  <script type="text/javascript" src="/static/javascript/cerebro/dashboard.js"></script>
+
+</head>
+
+
+
+
+<body>
+  <!-- Main container div -->
+  <div class "container-fluid">
+    <!-- Main Row Div -->
+    <div class="row-fluid ">
+
+      <!-- Sidebar Div -->
+      <div class="span3 sidebar">
+        <div class='container-fluid'>
+          <button id="paramsBtn" class='btn btn-primary'>Send Params</button>
+          <div class='control-group'>
+            <textarea class='input-block-level' wrap='soft' id='paramsText'></textarea>
+          </div>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+
+      </div> <!-- End sidebar -->
+
+
+      <!-- Main Content panel Div -->
+      <div class="span9" >
+        <ul class='nav nav-tabs' data-tabs="tabs">
+          <li class='active'><a href="#datasetTab" data-toggle="tab">Datasets</a></li>
+          <li><a href="#experimentTab" data-toggle="tab">Experiment</a></li>
+        </ul>
+
+
+
+        <!-- Tab Content Div -->
+        <div class='tab-content'>
+          <!-- Dataset creation tab -->
+          <div id="datasetTab" class="tab-pane active">
+            <h2>Create Datasets here</h2>
+            <!-- Accordion Div for dataset tab -->
+            <div id="datasetAccordion" class="accordion">
+              <!-- Accordion group for description files -->
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#datasetAccordion" href="#experimentFileDiv"><h4>Description File</h4>
+                  </a>
+                </div>
+                <!-- Pane for uploading decription files -->
+                <div id="experimentFileDiv" class="accordion-body collapse in">
+                  <div class="accordion-inner">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                      <input type="file" id="fileUpload"> <br/>
+                      <input type="file" id="subFileUpload"> <br/>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#datasetAccordion" href="#functionDiv"><h4>Function Dataset</h4>
+                  </a>
+                </div> <!-- End of accordion heading-->
+
+                <div id="functionDiv" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <b>def getRecord(t, history):</b><br/>
+                    <span style='margin-left:10px;'>
+                      <textarea id="fnText" placeholder="Write a python function to generate a dataset"></textarea>
+                    </span>
+                    <b>&nbsp;&nbsp;&nbsp;&nbsp;return fields</b><br/>
+                    <br/>
+                    <br/>
+                    Examples:<br/>
+                    <table class='table table-condensed table-bordered'>
+                      <tr >
+                        <td>fields['f'] = [1, 2, 3] OR fields['f'] = (1, 2, 3)</td>
+                        <td>sample <b>f</b> uniformly from {1,2,3} </td>
+                      </tr>
+                      <tr >
+                        <td>fields['f'] = {"A": 1.0, "B": 2.0}</td>
+                        <td>sample <b>f</b> value "B" 2 times as often as value "A"</td>
+                      </tr>
+                    </table>
+
+                    <br/>
+                    <br/>
+                    Iterations: <input type='text' class='input-mini' id="numIterations" size=5><br/>
+
+                    <button class='btn' id="dataButton">Create It!</button><br/>
+                    <button class='btn' id="dataSaveButton">Save CSV!</button><br/>
+                    <button class='btn' id="fnSaveButton">Save Function!</button><br/>
+                    <button class='btn' id="descSaveButton">Description File!</button><br/>
+                    <a href="saveDataset" style="display: none" id="saveLink" target="_blank">Save it</a>
+                    <a href="data:text/plain,Your text here" style="display: none" id="saveFnLink" target="_blank">Save it</a>
+
+                  </div>
+                </div>
+                <!-- Pane for creating procedural datasets -->
+
+            </div>
+          </div>
+        </div> <!-- End Dataset creation tab -->
+
+
+
+
+        <!-- Experiment Tab -->
+        <div id="experimentTab" class="container-fluid tab-pane">
+          <div class='row-fluid'>
+              <div id="dashboardPane" class="scrollPane span6">
+                <div id ="chartGroupDiv" class="scrollPane span12"></div>
+                Jump: <input type='text' class='input-mini' id="jumpInput" size=3><br/>
+                <button id="runButton">Run it!</button>
+                <button id="stopButton">Stop it!</button>
+                <button id="saveResultsButton">Save it!</button><br/>
+                <br/>
+                <br/>
+              </div>
+
+              <div id ="hintonPane" class="scrollPane span6">
+                <div id="mainHinton" class="hinton"></div>
+              </div>
+          </div>
+
+          <div id="encoderHintonContainer" class='row-fluid'>
+          </div>
+          <br/>
+
+          <div class="row-fluid">
+            <pre id="auxText" class="console span12">
+              <div id="auxSelector" class="auxSelector">
+              </div>
+            </pre>
+          </div>
+
+        </div> <!-- End Experiment Tab -->
+
+
+      </div> <!-- End Tab Content Div -->
+
+
+    </div> <!-- End Main Content -->
+  </div> <!-- End Main Row Div -->
+</div> <!-- End Main Container Div -->
+</body>

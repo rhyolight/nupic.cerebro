@@ -1,0 +1,39 @@
+body {
+  background-color: whitesmoke;
+}
+
+.sidebar {
+    background-color: #DEF;
+    border-color: #BCD;
+    /*display: block;
+    width: 200px;
+    float: left;
+    min-height: 100%;*/
+    height: auto !important;
+}
+
+.plot {
+  /*width: 600px;*/
+  display: inline-block;
+}
+
+.hinton {
+  background-color: black;
+  display: inline-block;
+}
+
+.scrollPane{
+  /*height: auto;
+  width: auto;*/
+  overflow: scroll;
+  display: inline-block;
+}
+
+pre.console
+{
+  background-color: rgb(0, 0, 0);
+  color: rgb(0, 255, 0);
+  color: hsb(1, 0 , 0);
+  white-space: pre-wrap;
+  font-family: monospace;
+}

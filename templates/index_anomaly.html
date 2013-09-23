@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <title>Cerebro 2</title>
+    <!--
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    -->
+    <link rel="stylesheet" href="/static/javascript/jquery/themes/start/jquery-ui-1.8.16.custom.css">
+    <link rel="stylesheet" href="/static/css/cerebro.css">
+    <link rel="stylesheet" href="/static/css/codemirror.css">
+    <script type="text/javascript">
+      GROK = { util: { heir: function(p) {
+                    function F() {}   // A dummy constructor function
+                    F.prototype = p;  // Specify the prototype object we want
+                    return new F();   // Invoke the constructor to create new object
+                }} };
+    </script>
+    <script type="text/javascript" src="/static/javascript/jquery/jquery-1.6.2.js"> </script>
+    <script type="text/javascript" src="/static/javascript/jquery/ui/jquery-ui.js"> </script>
+    <script type="text/javascript" src="/static/javascript/jquery/jquery.textarea.js"> </script>
+    <script type="text/javascript" src="/static/javascript/cerebro/experiment.js"> </script>
+    <script type="text/javascript" src="/static/javascript/dygraph/dygraph-combined.js" ></script>
+    <script type="text/javascript" src="/static/javascript/raphael-min.js"> </script><script type="text/javascript" src="/static/javascript/nugraph/nugraph.js" ></script>
+    <script type="text/javascript" src="/static/javascript/cerebro/hinton.js"> </script>
+    <script type="text/javascript" src="/static/javascript/interaction.js" ></script>
+    <script type="text/javascript" src="/static/javascript/chart.js" ></script>
+    <script type="text/javascript" src="/static/javascript/dataset.js" ></script>
+    <script type="text/javascript" src="/static/javascript/views/anomaly/chartgroup.js" ></script>
+    <script type="text/javascript" src="/static/javascript/views/anomaly/subgraphs.js" ></script>
+    <script type="text/javascript" src="/static/javascript/views/anomaly/main.js" ></script>
+    <script type="text/javascript" src="/static/javascript/views/anomaly/dygraphs-extra.js" ></script>
+    <script type="text/javascript">
+    var Globals = {};
+    </script>
+<style>
+BODY {
+  margin:20px;
+}
+
+#loadModel {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top:300px;
+  height:50px;
+  width:100%;
+  text-align: center;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+#MainView {
+  display: none;
+}
+
+#DetailView {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 500px;
+  
+
+}
+
+#DetailView #mainHinton {
+  margin:0px auto;
+  background-color: #000;
+}
+
+#saveImageDiv {
+  display: none;
+}
+
+</style>
+</head>
+
+
+
+
+<body>
+  <div id="saveImageDiv">
+    <img id="saveImageImg" />
+  </div>
+  <div id="loadModel">
+    <form id="uploadForm" enctype="multipart/form-data">
+      Select the description file for the model to run:<BR><BR>
+      <div style="text-align: left; width: 350px; font-size: 12px; margin: 0px auto">
+        Choose Description File: <input type="file" id="fileUpload"> <br/><br/>--or--<br/><br/>
+        Reload experiment: <select id="loadExperimentList"></select>
+        <input type="button" value="Load" id="loadExperiment">&nbsp;&nbsp;
+        <input type="button" value="Delete" id="deleteExperiment">
+      </div>
+    </form>
+  </div>
+  <div id="DetailView">
+    <div id="mainHinton"></div>
+  </div>
+  <div id="MainView">
+    <div style="float:left; width: 80%; overflow: hidden;";>
+      <div style="text-align:center;">Anomaly Browser
+        <!--
+        <input type="button" value="Save Image" id="imageSaver" />
+        -->
+      </div>
+      <div id="viewArea"></div>
+    </div>
+    <div style="float:right; width: 18%;">
+      <div style="height: 350px;">
+        <div style="height: 30px; font-size: 12px;">
+          <div id="saveResultsMessage"></div>
+        </div>
+        <input type="text" value="" style="width:100%" id="experimentName">
+        <input type="button" value="Save Results" id="saveResults">
+      </div>
+      <div>
+        <p>
+          <label for="amount">Threshold</label>
+          <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+        </p>
+        <div id="slider-vertical" style="height: 200px;"></div>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div id="SubGraphs"></div>
+  </div>
+</body>
+
+</html>
+  
