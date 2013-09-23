@@ -1,6 +1,6 @@
 # Cerebro
 
-A tool to run CLA models and visually examine the output of the Spatial Pooler. [Click here for a video introduction and tutorial](http://youtu.be/WQWU1K5tE5o).
+A tool for [NuPIC](http://github.com/numenta/nupic) to run CLA models and visually examine the output of the Spatial Pooler. [Click here for a video introduction and tutorial](http://youtu.be/WQWU1K5tE5o).
 
 ## What is Cerebro?
 
