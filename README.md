@@ -21,6 +21,7 @@ To install (with [Homebrew for Mac OS X](http://brew.sh/)):
 
 To launch:
 
+    mongod &
     python cerebro.py <portnum>
 
 In a browser, navigate to:
