@@ -20,10 +20,12 @@ To install (with [Homebrew for Mac OS X](http://brew.sh/)):
     pip install -r requirements.txt
 
 To launch:
+
     python cerebro.py <portnum>
 
 In a browser, navigate to:
-    localhost:<portnum>
+
+    http://localhost:<portnum>
 
 ## Datasets
 
